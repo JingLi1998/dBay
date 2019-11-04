@@ -33,26 +33,14 @@ app.get('/', (req, res) => {
 });
 
 // DISPLAY DOGS ROUTE
-app.get('/:breed', (req, res) => {
+app.get('/dogs', (req, res) => {
   // SHOW ALL
-  if (req.params.breed == "all") {
-    Dog.find({}, (err, dogs) => {
-      if (err) {
-        console.log(err);
-      } else {
-        res.render("breed", {dogs:dogs});
-      }
-    });
-  } else {
-    // SHOW A CERTAIN BREED
-    Dog.find({breed: req.params.dog}, (err, dogs) => {
-      if (err) {
-        console.log(err);
-      } else {
-        res.render("breed", {dogs: dogs});
-      }
-    });
-  }
+  Dog.find({}, (err, dogs) => {
+    if (err) {
+      return console.log(err);
+    }
+    res.render("dogs", {dogs: dogs});
+  });
 });
 
 // NEW ROUTE

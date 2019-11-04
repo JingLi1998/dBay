@@ -1,14 +1,14 @@
 <% include partials/header %>
 
 <div class="jumbotron">
-  <h1 class="display-3"><%= dogs[0].breed %></h1>
+  <!-- <h1 class="display-3"><%= dogs[0].breed %></h1> -->
   <p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt, odit.</p>
 </div>
 
-<div class="container">
+<div class="container-fluid">
   <div class="row">
     <% dogs.forEach(dog => { %>
-      <div class="col-sm-6 col-md-3 col-lg-2">
+      <div class="col-sm-6 col-md-3 col-lg-3">
         <div class="card mb-3">
           <h3 class="card-header"><%= dog.breed %></h3>  
           <div class="card-body">
