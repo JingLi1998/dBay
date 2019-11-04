@@ -1,14 +1,23 @@
+// REQUIRED PACKAGES
 const express = require('express'),
       bodyParser = require('body-parser'),
       methodOverride = require("method-override"),
       mongoose = require("mongoose"),
       expressSanitizer = require("express-sanitizer"),
-      Dog = require("./models/dog"),
-      // passport = require("passport"),
-      // LocalStrategy = require("passport-local"),
-      // User = require("./models/user"),
-      // Comment = require("./models/comment"),
+      passport = require("passport"),
+      LocalStrategy = require("passport-local"),
+      flash = require("connect-flash"),
       seedDB = require("./seed");
+
+// MODELS
+const Comment = require("./models/comment"),
+      Dog = require("./models/dog"),
+      User = require("./models/user");
+
+// ROUTES
+const commentRoutes = require("./routes/comments"),
+      dogRoutes = require("./routes/dogs"),
+      indexRoutes = require("./routes/index");
 
 let app = express();
 
@@ -16,7 +25,7 @@ let app = express();
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useFindAndModify', false);
 mongoose.set('useUnifiedTopology', true);
-mongoose.connect("mongodb://localhost/dbay_app");
+mongoose.connect("mongodb://localhost/dbay_app"); // database url environment variable later
 
 // APP CONFIG
 app.set('view engine', 'ejs');
@@ -25,68 +34,13 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(methodOverride("_method"));
 app.use(expressSanitizer());
 
+// SEED DB IF REQUIRED
 seedDB();
 
-// INDEX ROUTE
-app.get('/', (req, res) => {
-  res.render("index");
-});
-
-// DISPLAY DOGS ROUTE
-app.get('/dogs', (req, res) => {
-  // SHOW ALL
-  Dog.find({}, (err, dogs) => {
-    if (err) {
-      return console.log(err);
-    }
-    res.render("dogs", {dogs: dogs});
-  });
-});
-
-// NEW ROUTE
-app.get('/:breed/new', (req, res) => {
-  res.render("new");
-});
-
-// CREATE ROUTE
-app.post('/:breed', (req, res) => {
-  Dog.create(req.body.breed, (err, newDog) => {
-    if (err) {
-      console.log(err);
-      res.render("new");
-    } else {
-      console.log("success");
-      res.redirect("/" + req.body.breed);
-    }
-  });
-});
-
-// SHOW ROUTE
-app.get('/:breed/:id', (req, res) => {
-  Dog.findById(req.params.id, (err, foundDog) => {
-    if (err) {
-      console.log(err);
-      res.redirect("back");
-    } else {
-      res.render('show', {dog: foundDog});
-    }
-  });
-});
-
-// EDIT ROUTE
-app.get('/:dog/:id/edit', (req, res) => {
-  res.send('This is the edit route!');
-});
-
-// UPDATE ROUTE
-app.put('/:dog/:id', (req, res) => {
-  res.send("This is the put route!")
-});
-
-// DELETE ROUTE
-app.delete('/:dog/:id', (req, res) => {
-  res.send('This is the delete route!')
-});
+// ROUTE CONFIG
+app.use("/", indexRoutes);
+app.use("/dogs", dogRoutes);
+app.use("/dogs/:id/comments", commentRoutes);
 
 // START APP
 app.listen(3000, () => {
