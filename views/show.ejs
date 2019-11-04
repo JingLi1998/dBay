@@ -1,0 +1,41 @@
+<% include partials/header %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <p class="lead"></p>
+      <div class="list-group">
+        <li class="list-group-item active">Info 1</li>
+        <li class="list-group-item">Info 2</li>
+        <li class="list-group-item">Info 3</li>
+      </div>
+    </div>
+    <div class="col-md-9">
+      <div class="card my-3">
+        <h3 class="card-header"><%= dog.breed %></h3>  
+        <div class="card-body">
+          <h5 class="card-title"><%= drug.name %></h5>  
+          <h6 class="card-subtitle"><% dog.amount %></h6>
+        </div>
+        <img class="img-fluid" src="<%= dog.image %>" alt="">
+        <div class="card-body">
+          <p class="card-text"><%= dog.description %></p>  
+        </div>
+        <div class="card-body">
+          <a href="#" class="card-link">See More</a>  
+          <a href="#" class="card-link">Buy Now</a>  
+        </div>
+        <div class="card-footer">
+          <p>Posted: <%= dog.created.toDateString() %></p>  
+        </div>
+      </div>  
+    </div>
+  </div>
+</div>
+
+
+  
+
+
+
+<% include partials/footer %>
