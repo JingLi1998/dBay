@@ -1,6 +1,6 @@
 <% include partials/header %>
 
-<div class="container">
+<div class="container-fluid">
   <div class="row">
     <div class="col-md-3">
       <p class="lead"></p>
@@ -10,20 +10,22 @@
         <li class="list-group-item">Info 3</li>
       </div>
     </div>
-    <div class="col-md-9">
+    <div class="col-md-6">
       <div class="card my-3">
-        <h3 class="card-header"><%= dog.breed %></h3>  
+        <h3 class="card-header"><%= dog.name %></h3>  
         <div class="card-body">
-          <h5 class="card-title"><%= drug.name %></h5>  
+          <h5 class="card-title"><%= dog.breed %></h5>  
           <h6 class="card-subtitle"><% dog.amount %></h6>
         </div>
-        <img class="img-fluid" src="<%= dog.image %>" alt="">
+        <img class="img-fluid" style="object-fit: cover; width: 100%" src="<%= dog.image %>" alt="">
         <div class="card-body">
           <p class="card-text"><%= dog.description %></p>  
         </div>
         <div class="card-body">
-          <a href="#" class="card-link">See More</a>  
-          <a href="#" class="card-link">Buy Now</a>  
+          <a href="/dogs/<%= dog._id %>/edit" class="btn btn-sm btn-primary" class="card-link">Edit</a>  
+          <form id="form-delete" action="/dogs/<%= dog._id %>?_method=DELETE" method="post">
+            <button class="btn btn-sm btn-primary">Delete</button>
+          </form>
         </div>
         <div class="card-footer">
           <p>Posted: <%= dog.created.toDateString() %></p>  

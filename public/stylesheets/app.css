@@ -9,3 +9,7 @@
 .jumbotron {
   padding: 2rem 1rem;
 }
+
+#form-delete {
+  display: inline;
+}

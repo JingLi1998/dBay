@@ -35,26 +35,46 @@ router.get('/:id', (req, res) => {
   Dog.findById(req.params.id, (err, foundDog) => {
     if (err) {
       console.log(err);
-      res.redirect("back");
-    } else {
-      res.render('show', {dog: foundDog});
+      return res.redirect("back");
     }
+    res.render('show', {dog: foundDog});
   });
 });
 
 // EDIT ROUTE
 router.get('/:id/edit', (req, res) => {
-  res.send('This is the edit route!');
+  Dog.findById(req.params.id, (err, foundDog) => {
+    if (err) {
+      console.log(err);
+      return  res.redirect('back');
+    }
+    res.render('edit', {dog: foundDog});
+  });
 });
 
 // UPDATE ROUTE
 router.put('/:id', (req, res) => {
-  res.send("This is the put route!")
+  Dog.findByIdAndUpdate(req.params.id, req.body.dog, (err, dog) => {
+    if (err) {
+      console.log(err);
+      return  res.redirect('back');
+    }
+    console.log(success);
+    res.redirect('/dogs/' + req.params.id);
+  });
 });
 
 // DELETE ROUTE
 router.delete('/:id', (req, res) => {
-  res.send('This is the delete route!')
+  Dog.findById(req.params.id, (err, dog) => {
+    if (err) {
+      console.log(err);
+      return res.redirect("back");
+    }
+    dog.remove();
+    console.log("removed");
+    res.redirect('/dogs');
+  });
 });
 
 module.exports = router;
