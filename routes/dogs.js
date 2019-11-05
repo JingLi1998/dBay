@@ -20,14 +20,13 @@ router.get('/new', (req, res) => {
 
 // CREATE ROUTE
 router.post('/', (req, res) => {
-  Dog.create(req.body.breed, (err, newDog) => {
+  Dog.create(req.body.dog, (err, newDog) => {
     if (err) {
-      console.log(err);
-      res.render("new");
-    } else {
-      console.log("success");
-      res.redirect("/" + req.body.breed);
+      console.log(err)
+      return res.render("new");
     }
+    console.log(newDog);
+    res.redirect("/dogs");
   });
 });
 
