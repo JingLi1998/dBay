@@ -21,7 +21,15 @@ var dogSchema = new mongoose.Schema({
       ref: "User",
     },
     username: String,
-  }
+  },
+});
+
+dogSchema.pre("remove", async function () {
+  await Comment.remove({
+    _id: {
+      $in: this.comments
+    }
+  });
 });
 
 module.exports = mongoose.model("Dog", dogSchema);

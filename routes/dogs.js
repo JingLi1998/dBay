@@ -32,7 +32,7 @@ router.post('/', (req, res) => {
 
 // SHOW ROUTE
 router.get('/:id', (req, res) => {
-  Dog.findById(req.params.id, (err, foundDog) => {
+  Dog.findById(req.params.id).populate("comments").exec((err, foundDog) => {
     if (err) {
       console.log(err);
       return res.redirect("back");

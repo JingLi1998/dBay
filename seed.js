@@ -1,4 +1,5 @@
 const mongoose = require("mongoose"),
+      Comment = require("./models/comment"),
       Dog = require("./models/dog");
 
 var data = [
@@ -44,20 +45,34 @@ function seedDB() {
   // delete dogs
   Dog.deleteMany({}, (err) => {
     if (err) {
-      console.log(err);
-    } else {
-      console.log("Removed All");
+      return console.log(err);
+    }
+    // delete comments
+    Comment.deleteMany({}, (err) => {
+      if (err) {
+        return console.log(err);
+      } 
       // add new dogs
       data.forEach(seed => {
         Dog.create(seed, (err, dog) => {
           if (err) {
-            console.log(err);
-          } else {
-            console.log("New Dog");
+            return console.log(err);
           }
+          console.log("New Dog");
+          // add new comment
+          Comment.create({
+            text: "Hello World!",
+          }, (err, newComment) => {
+            if (err) {
+              return console.log(err);
+            }
+            dog.comments.push(newComment);
+            dog.save();
+            console.log("comment added")       
+          });
         });
       });
-    }
+    });
   });
 }
 

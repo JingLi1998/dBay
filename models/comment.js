@@ -8,6 +8,7 @@ var commentSchema = mongoose.Schema({
     },
     username: String,
   },
+  author: String,
   text: String,
 });
 
