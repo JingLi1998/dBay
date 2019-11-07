@@ -4,11 +4,33 @@ const express = require("express"),
       Comment = require("../models/comment");
 
 router.get('/new', (req, res) => {
-  res.send("New Comment Form");
+  Dog.findById(req.params.id, (err, dog) => {
+    if (err) {
+      console.log(err);
+      return  res.redirect('back');
+    }
+    res.render("comments/new", {dog: dog});
+  })
 });
 
 router.post('/', (req, res) => {
-  res.send("Post new comment");
+  Dog.findById(req.params.id, (err, dog) => {
+    if (err) {
+      console.log(err);
+       res.redirect('back');
+    }
+    Comment.create(req.body.comment, (err, newComment) => {
+      if (err) {
+        console.log(err);
+        return res.redirect("back");
+      }
+      console.log(newComment);
+      dog.comments.push(newComment);
+      dog.save();
+      console.log("added new comment");
+      res.redirect("/dogs/" + req.params.id);
+    });
+  });
 });
 
 router.get('/:comment_id/edit', (req, res) => {

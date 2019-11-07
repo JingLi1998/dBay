@@ -1,4 +1,4 @@
-<% include partials/header %>
+<% include ../partials/header %>
 
 <div class="container-fluid">
   <div class="row">
@@ -36,11 +36,19 @@
       <div class="card my-3">
         <div class="card-body">
           <% dog.comments.forEach(comment => { %>
-            <p><%= comment.text %></p>
+            <div class="card mb-2">
+              <h6 class="card-header">Jing Li</h6>
+              <div class="card-body py-1">
+                <p class="m-0 py-1"><%= comment.text %></p>
+              </div>  
+            </div>
           <% }); %>
+          <hr>
+          <a class="btn btn-primary btn-sm"href="/dogs/<%= dog._id %>/comments/new">Add New Comment</a>
         </div>
       </div>
     </div>
   </div>
 </div>
-<% include partials/footer %>
+
+<% include ../partials/footer %>

@@ -9,13 +9,13 @@ router.get('/', (req, res) => {
     if (err) {
       return console.log(err);
     }
-    res.render("dogs", {dogs: dogs});
+    res.render("dogs/dogs", {dogs: dogs});
   });
 });
 
 // NEW ROUTE
 router.get('/new', (req, res) => {
-  res.render("new");
+  res.render("dogs/new");
 });
 
 // CREATE ROUTE
@@ -23,7 +23,7 @@ router.post('/', (req, res) => {
   Dog.create(req.body.dog, (err, newDog) => {
     if (err) {
       console.log(err)
-      return res.render("new");
+      return res.render("dogs/new");
     }
     console.log(newDog);
     res.redirect("/dogs");
@@ -37,7 +37,7 @@ router.get('/:id', (req, res) => {
       console.log(err);
       return res.redirect("back");
     }
-    res.render('show', {dog: foundDog});
+    res.render('dogs/show', {dog: foundDog});
   });
 });
 
@@ -48,7 +48,7 @@ router.get('/:id/edit', (req, res) => {
       console.log(err);
       return  res.redirect('back');
     }
-    res.render('edit', {dog: foundDog});
+    res.render('dogs/edit', {dog: foundDog});
   });
 });
 
