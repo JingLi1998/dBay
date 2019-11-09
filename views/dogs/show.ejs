@@ -38,8 +38,12 @@
           <% dog.comments.forEach(comment => { %>
             <div class="card mb-2">
               <h6 class="card-header">Jing Li</h6>
-              <div class="card-body py-1">
-                <p class="m-0 py-1"><%= comment.text %></p>
+              <div class="card-body pr-2 py-1 d-inline-flex justify-content-between">
+                  <p class="m-0 py-1 flex-grow-1"><%= comment.text %></p>
+                  <a class="btn btn-outline mr-2 btn-warning btn-sm" href="#">Edit</a>
+                  <form action="/dogs/<%= dog._id %>/comments/<%= comment._id %>/?_method=DELETE" method="post">
+                    <button style="display: inline;" class="btn btn-outline btn-danger btn-sm mr-0">Delete</button>
+                  </form>
               </div>  
             </div>
           <% }); %>

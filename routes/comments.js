@@ -42,7 +42,14 @@ router.put('/:comment_id', (req, res) => {
 });
 
 router.delete('/:comment_id', (req, res) => {
-  res.send("Delete Comment");
+  Comment.findByIdAndDelete(req.params.comment_id, (err) => {
+    if (err) {
+      console.log(err);
+      return res.redirect('back');
+    }
+    console.log("comment deleted");
+     res.redirect('/dogs/' + req.params.id);
+  })
 });
 
 module.exports = router;
