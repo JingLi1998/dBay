@@ -49,7 +49,6 @@ app.use("/dogs", dogRoutes);
 app.use("/dogs/:id/comments", commentRoutes);
 
 // START APP
-
 app.listen(process.env.PORT, () => {
   console.log(`Server started on 3000`);
 });
