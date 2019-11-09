@@ -9,11 +9,6 @@ const express = require('express'),
       flash = require("connect-flash"),
       seedDB = require("./seed");
 
-// MODELS
-const Comment = require("./models/comment"),
-      Dog = require("./models/dog"),
-      User = require("./models/user");
-
 // ROUTES
 const commentRoutes = require("./routes/comments"),
       dogRoutes = require("./routes/dogs"),

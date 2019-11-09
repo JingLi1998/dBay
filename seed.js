@@ -68,7 +68,7 @@ function seedDB() {
             }
             dog.comments.push(newComment);
             dog.save();
-            console.log("comment added")       
+            console.log("Comment Added")       
           });
         });
       });

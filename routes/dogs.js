@@ -25,7 +25,7 @@ router.post('/', (req, res) => {
       console.log(err)
       return res.render("dogs/new");
     }
-    console.log(newDog);
+    console.log("Dog Created");
     res.redirect("/dogs");
   });
 });
@@ -59,7 +59,7 @@ router.put('/:id', (req, res) => {
       console.log(err);
       return  res.redirect('back');
     }
-    console.log(success);
+    console.log("Dog Updated");
     res.redirect('/dogs/' + req.params.id);
   });
 });
@@ -72,7 +72,7 @@ router.delete('/:id', (req, res) => {
       return res.redirect("back");
     }
     dog.remove();
-    console.log("removed");
+    console.log("Dog Removed");
     res.redirect('/dogs');
   });
 });
