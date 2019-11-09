@@ -2,12 +2,20 @@
   padding: 1rem 2rem;
 }
 
+i {
+  width: 20px;
+}
+
 .form.container{
   max-width: 40%;
 }
 
 .jumbotron {
   padding: 2rem 1rem;
+}
+
+.dropdown-menu {
+  min-width: 80px;
 }
 
 #form-delete {
