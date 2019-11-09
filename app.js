@@ -22,10 +22,16 @@ const commentRoutes = require("./routes/comments"),
 let app = express();
 
 // MONGOOSE CONFIG
-mongoose.set('useNewUrlParser', true);
-mongoose.set('useFindAndModify', false);
-mongoose.set('useUnifiedTopology', true);
-mongoose.connect("mongodb://localhost/dbay_app"); // database url environment variable later
+mongoose.connect(process.env.DATABASEURL, {
+  useNewUrlParser: true,
+  useFindAndModify: false,
+  useUnifiedTopology: true,
+  useCreateIndex: true,
+}).then(() => {
+  console.log("Database Connected");
+}).catch(err => {
+  console.log('ERROR', err.message);
+});
 
 // APP CONFIG
 app.set('view engine', 'ejs');
@@ -35,7 +41,7 @@ app.use(methodOverride("_method"));
 app.use(expressSanitizer());
 
 // SEED DB IF REQUIRED
-seedDB();
+// seedDB();
 
 // ROUTE CONFIG
 app.use("/", indexRoutes);
