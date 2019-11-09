@@ -34,11 +34,23 @@ router.post('/', (req, res) => {
 });
 
 router.get('/:comment_id/edit', (req, res) => {
-  res.send("Edit Comment Form");
+  Comment.findById(req.params.comment_id, (err, comment) => {
+    if (err) {
+      console.log(err);
+      return  res.redirect('back');
+    }
+    res.render("comments/edit", {comment: comment, dog_id: req.params.id});
+  });
 });
 
 router.put('/:comment_id', (req, res) => {
-  res.send("Update Comment");
+  Comment.findByIdAndUpdate(req.params.comment_id, req.body.comment, (err, comment) => {
+    if (err) {
+      console.log(err);
+      return res.redirect("back");
+    }
+     res.redirect('/dogs/' + req.params.id);
+  });
 });
 
 router.delete('/:comment_id', (req, res) => {

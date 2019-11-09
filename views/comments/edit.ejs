@@ -1,0 +1,22 @@
+<% include ../partials/header %>
+
+<div class="form container mt-3">
+  <h1 class="text-center">Edit Comment</h1>
+  <form class="form" action="/dogs/<%= dog_id %>/comments/<%= comment._id %>?_method=PUT" method="post">
+    <div class="form-group">
+      <textarea name="comment[text]" class="form-control" rows="5"><%= comment.text %></textarea>
+    </div>
+    <div class="row">
+      <div class="col-6">
+        <a class = "btn btn-block btn-primary" href="/dogs">Go Back</a>
+      </div>
+      <div class="col-6">
+        <div class="form-group">
+          <button type="submit" class="btn btn-block btn-primary">Submit</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<% include ../partials/footer %>
