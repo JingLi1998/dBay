@@ -6,8 +6,11 @@ const express = require('express'),
       expressSanitizer = require("express-sanitizer"),
       passport = require("passport"),
       LocalStrategy = require("passport-local"),
+      User = require('./models/user'),
       flash = require("connect-flash"),
-      seedDB = require("./seed");
+      seedDB = require("./seed"),
+      session = require("express-session"),
+      MemoryStore = require("session-memory-store")(session);
 
 // ROUTES
 const commentRoutes = require("./routes/comments"),
@@ -34,6 +37,25 @@ app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(methodOverride("_method"));
 app.use(expressSanitizer());
+app.use(session({
+  resave: false,
+  saveUninitialized: false,
+  name: "JSESSION",
+  secret: "Luna Gao",
+  store: new MemoryStore(),
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+app.use(flash());
+app.use((req, res, next) => {
+  res.locals.currentUser = req.user;
+  res.locals.error = req.flash("error");
+  res.locals.success = req.flash("success");
+  next();
+});
 
 // SEED DB IF REQUIRED
 // seedDB();
