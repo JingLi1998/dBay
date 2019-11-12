@@ -10,7 +10,7 @@ router.get('/', (req, res) => {
 
 // ABOUT ROUTE
 router.get('/about', (req, res) => {
-  res.send('You have reached the about route');
+  res.render('about');
 });
 
 // SIGNUP ROUTE

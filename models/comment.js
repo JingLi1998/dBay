@@ -1,10 +1,10 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 var commentSchema = mongoose.Schema({
   author: {
     id: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "User"
+      ref: 'User'
     },
     username: String,
   },
@@ -12,4 +12,4 @@ var commentSchema = mongoose.Schema({
   text: String,
 });
 
-module.exports = mongoose.model("Comment", commentSchema);
+module.exports = mongoose.model('Comment', commentSchema);

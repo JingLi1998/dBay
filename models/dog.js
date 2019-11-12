@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 var dogSchema = new mongoose.Schema({
   breed: String,
@@ -12,19 +12,19 @@ var dogSchema = new mongoose.Schema({
   comments: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Comment",
+      ref: 'Comment',
     }
   ],
   author: {
     id: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
+      ref: 'User',
     },
     username: String,
   },
 });
 
-dogSchema.pre("remove", async function () {
+dogSchema.pre('remove', async function () {
   await Comment.remove({
     _id: {
       $in: this.comments
@@ -32,4 +32,4 @@ dogSchema.pre("remove", async function () {
   });
 });
 
-module.exports = mongoose.model("Dog", dogSchema);
+module.exports = mongoose.model('Dog', dogSchema);
