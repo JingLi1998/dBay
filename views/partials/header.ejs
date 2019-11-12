@@ -30,15 +30,21 @@
       </li>
     </ul>
     <ul class="navbar-nav ml-auto">
-      <li class="nav-item">
-        <a class="nav-link" href="/login">Log In</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/signup">Sign Up</a>
-      </li>
-      <li class="nav-item mr-0">
-        <a class="nav-link" href="/logout">Log Out</a>
-      </li>
+      <% if (currentUser) { %>
+        <li class="nav-item">
+          <p class="nav-link mb-0">Hello <%= currentUser.username %></p>
+        </li>
+        <li class="nav-item mr-0">
+          <a class="nav-link" href="/logout">Log Out</a>
+        </li>
+      <% } else { %>
+        <li class="nav-item">
+          <a class="nav-link" href="/login">Log In</a>
+        </li>
+        <li class="nav-item mr-0">
+          <a class="nav-link" href="/signup">Sign Up</a>
+        </li>     
+      <% } %>  
     </ul>
   </div>
 </nav>
