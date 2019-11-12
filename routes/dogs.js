@@ -1,41 +1,42 @@
-const express = require("express"),
+const express = require('express'),
       router = express.Router(),
-      Dog = require("../models/dog");
+      Dog = require('../models/dog');
 
 // DISPLAY DOGS ROUTE
 router.get('/', (req, res) => {
   // SHOW ALL
   Dog.find({}, (err, dogs) => {
     if (err) {
-      return console.log(err);
+      req.flash('error', 'Something went wrong, please try again');
+      return res.redirect('back');
     }
-    res.render("dogs/dogs", {dogs: dogs});
+    res.render('dogs/dogs', {dogs: dogs});
   });
 });
 
 // NEW ROUTE
 router.get('/new', (req, res) => {
-  res.render("dogs/new");
+  res.render('dogs/new');
 });
 
 // CREATE ROUTE
 router.post('/', (req, res) => {
   Dog.create(req.body.dog, (err, newDog) => {
     if (err) {
-      console.log(err)
-      return res.render("dogs/new");
+      req.flash('error', 'Your dog could not be added')
+      return res.render('dogs/new');
     }
-    console.log("Dog Created");
-    res.redirect("/dogs");
+    req.flash('success', 'Your dog has been added')
+    res.redirect('/dogs');
   });
 });
 
 // SHOW ROUTE
 router.get('/:id', (req, res) => {
-  Dog.findById(req.params.id).populate("comments").exec((err, foundDog) => {
+  Dog.findById(req.params.id).populate('comments').exec((err, foundDog) => {
     if (err) {
-      console.log(err);
-      return res.redirect("back");
+      req.flash('error', 'Something went wrong, please try again');
+      return res.redirect('back');
     }
     res.render('dogs/show', {dog: foundDog});
   });
@@ -45,7 +46,7 @@ router.get('/:id', (req, res) => {
 router.get('/:id/edit', (req, res) => {
   Dog.findById(req.params.id, (err, foundDog) => {
     if (err) {
-      console.log(err);
+      req.flash('error', 'Something went wrong, please try again');
       return  res.redirect('back');
     }
     res.render('dogs/edit', {dog: foundDog});
@@ -56,10 +57,10 @@ router.get('/:id/edit', (req, res) => {
 router.put('/:id', (req, res) => {
   Dog.findByIdAndUpdate(req.params.id, req.body.dog, (err, dog) => {
     if (err) {
-      console.log(err);
-      return  res.redirect('back');
+      req.flash('error', 'Could not update dog');
+      return res.redirect('back');
     }
-    console.log("Dog Updated");
+    req.flash('success', 'Your dog has been updated');
     res.redirect('/dogs/' + req.params.id);
   });
 });
@@ -68,11 +69,11 @@ router.put('/:id', (req, res) => {
 router.delete('/:id', (req, res) => {
   Dog.findById(req.params.id, (err, dog) => {
     if (err) {
-      console.log(err);
-      return res.redirect("back");
+      req.flash('error', 'Could not delete dog');
+      return res.redirect('back');
     }
     dog.remove();
-    console.log("Dog Removed");
+    req.flash('success', 'Your dog has been deleted');
     res.redirect('/dogs');
   });
 });
