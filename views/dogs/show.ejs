@@ -1,6 +1,6 @@
 <% include ../partials/header %>
 
-<div class="container-fluid">
+<div class="container-fluid mt-0">
   <div class="row">
     <div class="col-md-3">
       <p class="lead"></p>
@@ -22,13 +22,16 @@
           <p class="card-text"><%= dog.description %></p>  
         </div>
         <div class="card-body">
+          <% if (currentUser && dog.author.id.equals(currentUser._id)) { %>
           <a href="/dogs/<%= dog._id %>/edit" class="btn btn-sm btn-primary" class="card-link">Edit</a>  
           <form id="form-delete" action="/dogs/<%= dog._id %>?_method=DELETE" method="post">
             <button class="btn btn-sm btn-primary">Delete</button>
           </form>
+          <% } %>
         </div>
         <div class="card-footer">
-          <p>Posted: <%= dog.created.toDateString() %></p>  
+          <p>Posted on: <%= dog.created.toDateString() %></p>
+          <p>Submitted by: <%= dog.author.username %></p>
         </div>
       </div>  
     </div>
@@ -40,6 +43,7 @@
               <h6 class="card-header">Jing Li</h6>
               <div class="card-body pr-2 py-1 d-inline-flex justify-content-between">
                 <p class="m-0 py-1"><%= comment.text %></p>
+                <% if (currentUser && comment.author.id.equals(currentUser._id)) { %>
                 <div class="btn-group">
                   <button class="btn btn-secondary btn-sm dropdown-toggle" aria-haspopup="true" data-toggle="dropdown"></button>  
                   <div class="dropdown-menu dropdown-menu-right">
@@ -48,7 +52,8 @@
                       <button class="dropdown-item"><i class="far fa-trash-alt"></i>Delete</button>
                   </form>    
                   </div>
-                </div>            
+                </div>
+                <% } %>            
               </div>  
             </div>
           <% }); %>

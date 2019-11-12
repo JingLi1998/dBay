@@ -1,7 +1,7 @@
 <% include ../partials/header %>
 
 <div class="jumbotron">
-  <h1 class="display-3">All Dogs</h1>
+  <h1 class="display-4">Our Dogs</h1>
   <p class="lead">Lots of good boys to make you go crazy!</p>
   <hr>
   <a class="btn btn-sm btn-primary" href="/dogs/new">Add a new pupper!</a>
@@ -17,13 +17,13 @@
             <h5 class="card-title"><%= dog.breed %></h5>  
             <h6 class="card-subtitle"><% dog.amount %></h6>
           </div>
-            <img src="<%= dog.image %>" alt="" style="height: 15vw; width: 100%; display:block; object-fit: cover;">
+            <img class="gallery" src="<%= dog.image %>" alt="">
           <div class="card-body">
             <p class="card-text"><%= dog.description %></p>  
           </div>
           <div class="card-body">
             <a href="/dogs/<%= dog._id %>" class="card-link">See More</a>  
-            <a href="#" class="card-link">Buy Now</a>  
+            <a href="#" class="card-link disabledlink">Buy Now</a>  
           </div>
           <div class="card-footer">
             <p>Posted: <%= dog.created.toDateString() %></p>  

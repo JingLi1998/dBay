@@ -15,19 +15,21 @@ router.get('/new', middleware.isLoggedIn, (req, res) => {
 });
 
 router.post('/', middleware.isLoggedIn, (req, res) => {
+  let author = {
+    id: req.user._id,
+    username: req.user.username,
+  }
+  req.body.comment.author = author;
   Dog.findById(req.params.id, (err, dog) => {
     if (err) {
       req.flash('error', 'Something went wrong, please try again');
       return res.redirect('back');
     }
-    let author = {
-      id: req.user._id,
-      username: req.user.username,
-    }
-    req.body.comment.author = author;
+    console.log(req.body.comment);
     Comment.create(req.body.comment, (err, newComment) => {
       if (err) {
         console.log(err);
+        req.flash('error', 'Something went wrong, please try again');
         return res.redirect('back');
       }
       console.log(newComment);
