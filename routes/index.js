@@ -39,8 +39,16 @@ router.get('/login', (req, res) => {
 });
 
 // LOGIN LOGIC
-router.post('/login', (req, res) => {
-  res.send('You have been logged in');
+router.post('/login', passport.authenticate('local', {
+  successRedirect: "/dogs",
+  failureRedirect: "/login",
+}), (req, res) => {
+});
+
+router.get("/logout", (req, res) => {
+  req.logout();
+  req.flash("success", "You have been logged out.");
+  res.redirect('/dogs');
 });
 
 module.exports = router;
