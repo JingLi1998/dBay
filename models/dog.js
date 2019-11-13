@@ -1,4 +1,5 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose'),
+      Comment = require('../models/comment');
 
 var dogSchema = new mongoose.Schema({
   breed: String,

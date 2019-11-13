@@ -5,31 +5,30 @@
     <div class="col-md-3">
       <p class="lead"></p>
       <div class="list-group">
-        <li class="list-group-item active">Info 1</li>
-        <li class="list-group-item">Info 2</li>
-        <li class="list-group-item">Info 3</li>
+        <li class="list-group-item active">Dog Info</li>
+        <li class="list-group-item">Breed: <%= dog.breed %></li>
+        <li class="list-group-item">Gender: <%= dog.gender %></li>
+        <li class="list-group-item">Age: <%= dog.age %></li>
+        <li class="list-group-item">Cost: $<%= dog.amount %></li>
       </div>
     </div>
     <div class="col-md-6">
-      <div class="card my-3">
+      <div class="card my-3 border-0">
         <h3 class="card-header"><%= dog.name %></h3>  
-        <div class="card-body">
-          <h5 class="card-title"><%= dog.breed %></h5>  
-          <h6 class="card-subtitle"><% dog.amount %></h6>
-        </div>
         <img class="img-fluid" style="object-fit: cover; width: 100%" src="<%= dog.image %>" alt="">
-        <div class="card-body">
-          <p class="card-text"><%= dog.description %></p>  
+        <div class="card-body pl-1 pb-0">
+          <h5><%= dog.description %></h5>  
         </div>
-        <div class="card-body">
+        <hr>
+        <div class="card-body pl-1 pt-1">
           <% if (currentUser && dog.author.id.equals(currentUser._id)) { %>
-          <a href="/dogs/<%= dog._id %>/edit" class="btn btn-sm btn-primary" class="card-link">Edit</a>  
+          <a href="/dogs/<%= dog._id %>/edit" class="btn btn-primary" class="card-link">Edit</a>  
           <form id="form-delete" action="/dogs/<%= dog._id %>?_method=DELETE" method="post">
-            <button class="btn btn-sm btn-primary">Delete</button>
+            <button class="btn btn-primary">Delete</button>
           </form>
           <% } %>
         </div>
-        <div class="card-footer">
+        <div class="card-footer pl-1">
           <p>Posted on: <%= dog.created.toDateString() %></p>
           <p>Submitted by: <%= dog.author.username %></p>
         </div>

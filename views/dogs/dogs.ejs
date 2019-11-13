@@ -11,21 +11,17 @@
   <div class="row">
     <% dogs.forEach(dog => { %>
       <div class="col-sm-6 col-md-4 col-lg-3">
-        <div class="card mb-3">
-          <h3 class="card-header"><%= dog.name %></h3>  
-          <div class="card-body">
-            <h5 class="card-title"><%= dog.breed %></h5>  
-            <h6 class="card-subtitle"><% dog.amount %></h6>
-          </div>
-            <img class="gallery" src="<%= dog.image %>" alt="">
-          <div class="card-body">
-            <p class="card-text"><%= dog.description %></p>  
-          </div>
-          <div class="card-body">
+        <div class="card mb-3 border-0">
+          <img class="gallery" src="<%= dog.image %>" alt="">
+          <div class="card-body pt-3 pb-0">
+            <h5><%= dog.name %></h5>
+            <h6>Submitted by: <%= dog.author.username %></h6>          
+          </div>    
+          <div class="card-body pt-0 pb-2">
             <a href="/dogs/<%= dog._id %>" class="card-link">See More</a>  
             <a href="#" class="card-link disabledlink">Buy Now</a>  
           </div>
-          <div class="card-footer">
+          <div class="card-footer my-0">
             <p>Posted: <%= dog.created.toDateString() %></p>  
           </div>
         </div>  

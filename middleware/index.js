@@ -18,7 +18,7 @@ middlewareObj.checkDogOwnership = (req, res, next) => {
         req.flash('error', 'Something went wrong.');
         return res.redirect('back');
       }
-      if (Dog.author.id.equals(req.user._id)) {
+      if (dog.author.id.equals(req.user._id)) {
         return next();
       }
       req.flash('error', 'You don\'t have permission to do that');
