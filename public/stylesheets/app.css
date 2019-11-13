@@ -49,7 +49,7 @@ i {
 }
 
 .gallery {
-  height: 15vw; 
+  height: 50vw; 
   width: 100%; 
   display:block; 
   object-fit: cover;
@@ -71,4 +71,31 @@ i {
 
 .card-footer {
   background: white;
+}
+
+@media (min-width: 576px) {
+  .gallery {
+    height: 30vw; 
+    width: 100%; 
+    display:block; 
+    object-fit: cover;
+  }
+}
+
+@media (min-width: 768px) {
+  .gallery {
+    height: 20vw; 
+    width: 100%; 
+    display:block; 
+    object-fit: cover;
+  }
+}
+
+@media (min-width: 992px) {
+  .gallery {
+    height: 15vw; 
+    width: 100%; 
+    display:block; 
+    object-fit: cover;
+  }
 }
