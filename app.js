@@ -18,6 +18,7 @@ const commentRoutes = require('./routes/comments'),
       indexRoutes = require('./routes/index');
 
 let app = express();
+require('dotenv').config();
 
 // MONGOOSE CONFIG
 mongoose.connect(process.env.DATABASEURL, {
