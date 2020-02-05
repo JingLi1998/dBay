@@ -1,5 +1,5 @@
 const Dog = require('../models/dog'),
-      Comment = require('../models/comment');
+  Comment = require('../models/comment');
 
 let middlewareObj = {};
 
@@ -9,7 +9,7 @@ middlewareObj.isLoggedIn = (req, res, next) => {
   }
   req.flash('error', 'You need to be logged in to do that.');
   res.redirect('/login');
-}
+};
 
 middlewareObj.checkDogOwnership = (req, res, next) => {
   if (req.isAuthenticated()) {
@@ -21,10 +21,10 @@ middlewareObj.checkDogOwnership = (req, res, next) => {
       if (dog.author.id.equals(req.user._id)) {
         return next();
       }
-      req.flash('error', 'You don\'t have permission to do that');
+      req.flash('error', "You don't have permission to do that");
     });
   }
-}
+};
 
 middlewareObj.checkCommentOwnership = (req, res, next) => {
   if (req.isAuthenticated()) {
@@ -36,9 +36,9 @@ middlewareObj.checkCommentOwnership = (req, res, next) => {
       if (comment.author.id.equals(req.user._id)) {
         return next();
       }
-      req.flash('error', 'You don\'t have permission to do that');
+      req.flash('error', "You don't have permission to do that");
     });
   }
-}
+};
 
 module.exports = middlewareObj;

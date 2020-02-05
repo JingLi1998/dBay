@@ -14,16 +14,19 @@
     </div>
     <div class="col-md-6">
       <div class="card my-3 border-0">
-        <h3 class="card-header"><%= dog.name %></h3>  
-        <img class="img-fluid" style="object-fit: cover; width: 100%" src="<%= dog.image %>" alt="">
+        <h3 class="card-header"><%= dog.name %></h3>
+        <img class="img-fluid" style="object-fit: cover; width: 100%"
+          src="<%= dog.image %>" alt="">
         <div class="card-body pl-1 pb-0">
-          <h5><%= dog.description %></h5>  
+          <h5><%= dog.description %></h5>
         </div>
         <hr>
         <div class="card-body pl-1 pt-1">
           <% if (currentUser && dog.author.id.equals(currentUser._id)) { %>
-          <a href="/dogs/<%= dog._id %>/edit" class="btn btn-primary" class="card-link">Edit</a>  
-          <form id="form-delete" action="/dogs/<%= dog._id %>?_method=DELETE" method="post">
+          <a href="/dogs/<%= dog._id %>/edit" class="btn btn-primary"
+            class="card-link">Edit</a>
+          <form id="form-delete" action="/dogs/<%= dog._id %>?_method=DELETE"
+            method="post">
             <button class="btn btn-primary">Delete</button>
           </form>
           <% } %>
@@ -32,32 +35,40 @@
           <p>Posted on: <%= dog.created.toDateString() %></p>
           <p>Submitted by: <%= dog.author.username %></p>
         </div>
-      </div>  
+      </div>
     </div>
     <div class="col-md-3">
       <div class="card my-3">
         <div class="card-body">
           <% dog.comments.forEach(comment => { %>
-            <div class="card mb-2">
-              <h6 class="card-header">Jing Li</h6>
-              <div class="card-body pr-2 py-1 d-inline-flex justify-content-between">
-                <p class="m-0 py-1"><%= comment.text %></p>
-                <% if (currentUser && comment.author.id.equals(currentUser._id)) { %>
-                <div class="btn-group">
-                  <button class="btn btn-secondary btn-sm dropdown-toggle" aria-haspopup="true" data-toggle="dropdown"></button>  
-                  <div class="dropdown-menu dropdown-menu-right">
-                    <a class="dropdown-item" href="/dogs/<%= dog._id %>/comments/<%= comment._id %>/edit"><i class="far fa-edit"></i>Edit</a>
-                    <form action="/dogs/<%= dog._id %>/comments/<%= comment._id %>/?_method=DELETE" method="post">
-                      <button class="dropdown-item"><i class="far fa-trash-alt"></i>Delete</button>
-                  </form>    
-                  </div>
+          <div class="card mb-2">
+            <h6 class="card-header">Jing Li</h6>
+            <div
+              class="card-body pr-2 py-1 d-inline-flex justify-content-between">
+              <p class="m-0 py-1"><%= comment.text %></p>
+              <% if (currentUser && comment.author.id.equals(currentUser._id)) { %>
+              <div class="btn-group">
+                <button class="btn btn-secondary btn-sm dropdown-toggle"
+                  aria-haspopup="true" data-toggle="dropdown"></button>
+                <div class="dropdown-menu dropdown-menu-right">
+                  <a class="dropdown-item"
+                    href="/dogs/<%= dog._id %>/comments/<%= comment._id %>/edit"><i
+                      class="far fa-edit"></i>Edit</a>
+                  <form
+                    action="/dogs/<%= dog._id %>/comments/<%= comment._id %>/?_method=DELETE"
+                    method="post">
+                    <button class="dropdown-item"><i
+                        class="far fa-trash-alt"></i>Delete</button>
+                  </form>
                 </div>
-                <% } %>            
-              </div>  
+              </div>
+              <% } %>
             </div>
+          </div>
           <% }); %>
           <hr>
-          <a class="btn btn-primary btn-sm"href="/dogs/<%= dog._id %>/comments/new">Add New Comment</a>
+          <a class="btn btn-primary btn-sm"
+            href="/dogs/<%= dog._id %>/comments/new">Add New Comment</a>
         </div>
       </div>
     </div>

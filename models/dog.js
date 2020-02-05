@@ -1,5 +1,5 @@
 const mongoose = require('mongoose'),
-      Comment = require('../models/comment');
+  Comment = require('../models/comment');
 
 var dogSchema = new mongoose.Schema({
   breed: String,
@@ -9,23 +9,23 @@ var dogSchema = new mongoose.Schema({
   age: String,
   amount: String,
   description: String,
-  created: {type: Date, default: Date.now},
+  created: { type: Date, default: Date.now },
   comments: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Comment',
+      ref: 'Comment'
     }
   ],
   author: {
     id: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'User',
+      ref: 'User'
     },
-    username: String,
-  },
+    username: String
+  }
 });
 
-dogSchema.pre('remove', async function () {
+dogSchema.pre('remove', async function() {
   await Comment.remove({
     _id: {
       $in: this.comments

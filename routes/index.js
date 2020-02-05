@@ -1,7 +1,7 @@
 const express = require('express'),
-      router = express.Router(),
-      passport = require('passport'),
-      User = require('../models/user');
+  router = express.Router(),
+  passport = require('passport'),
+  User = require('../models/user');
 
 // INDEX ROUTE
 router.get('/', (req, res) => {
@@ -20,7 +20,7 @@ router.get('/signup', (req, res) => {
 
 // SIGNUP LOGIC
 router.post('/signup', (req, res) => {
-  let newUser = new User({username: req.body.username});
+  let newUser = new User({ username: req.body.username });
   User.register(newUser, req.body.password, (err, user) => {
     if (err) {
       req.flash('error', err.message);
@@ -39,13 +39,16 @@ router.get('/login', (req, res) => {
 });
 
 // LOGIN LOGIC
-router.post('/login', passport.authenticate('local', {
-  successRedirect: '/dogs',
-  failureRedirect: '/login',
-  successFlash: 'Welcome back!',
-  failureFlash: true,
-}), (req, res) => {
-});
+router.post(
+  '/login',
+  passport.authenticate('local', {
+    successRedirect: '/dogs',
+    failureRedirect: '/login',
+    successFlash: 'Welcome back!',
+    failureFlash: true
+  }),
+  (req, res) => {}
+);
 
 router.get('/logout', (req, res) => {
   req.logout();

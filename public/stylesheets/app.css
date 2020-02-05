@@ -6,7 +6,7 @@ i {
   width: 20px;
 }
 
-.form.container{
+.form.container {
   max-width: 40%;
   min-width: 500px;
 }
@@ -27,7 +27,6 @@ i {
   pointer-events: none;
 }
 
-
 .dropdown-menu {
   min-width: 80px;
 }
@@ -37,9 +36,9 @@ i {
 }
 
 #not_button {
-  background: none!important;
+  background: none !important;
   border: none;
-  padding: 0!important;
+  padding: 0 !important;
   /*optional*/
   font-family: arial, sans-serif;
   /*input has OS specific font-family*/
@@ -49,18 +48,18 @@ i {
 }
 
 .gallery {
-  height: 50vw; 
-  width: 100%; 
-  display:block; 
+  height: 50vw;
+  width: 100%;
+  display: block;
   object-fit: cover;
 }
 
 .landing {
   background-image: url(../images/landing.jpg);
-  position: fixed; 
-  top: -12%; 
-  left: -10%; 
-  width: 120%; 
+  position: fixed;
+  top: -12%;
+  left: -10%;
+  width: 120%;
   height: 120%;
   z-index: -1;
   object-fit: contain;
@@ -75,27 +74,27 @@ i {
 
 @media (min-width: 576px) {
   .gallery {
-    height: 30vw; 
-    width: 100%; 
-    display:block; 
+    height: 30vw;
+    width: 100%;
+    display: block;
     object-fit: cover;
   }
 }
 
 @media (min-width: 768px) {
   .gallery {
-    height: 20vw; 
-    width: 100%; 
-    display:block; 
+    height: 20vw;
+    width: 100%;
+    display: block;
     object-fit: cover;
   }
 }
 
 @media (min-width: 992px) {
   .gallery {
-    height: 15vw; 
-    width: 100%; 
-    display:block; 
+    height: 15vw;
+    width: 100%;
+    display: block;
     object-fit: cover;
   }
 }
